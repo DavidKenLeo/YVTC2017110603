@@ -43,8 +43,14 @@ public class MainActivity extends AppCompatActivity {
     {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_FILE, null, SQLiteDatabase.OPEN_READWRITE);
         Cursor c = db.rawQuery("Select * from phone", null);
-        c.moveToFirst();
-        Log.d("DATA", c.getString(1) + "," + c.getString(2));
+        if (c.moveToFirst())
+        {
+            do {
+                Log.d("DATA", c.getString(1) + "," + c.getString(2));
+            } while (c.moveToNext());
+        }
+
+
 
     }
 }
