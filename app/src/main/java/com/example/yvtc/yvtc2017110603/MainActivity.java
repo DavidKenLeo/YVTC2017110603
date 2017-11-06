@@ -21,16 +21,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DB_FILE = getFilesDir() + File.separator + "mydata.sqlite";
+
         try {
-            InputStream is = getResources().openRawResource(R.raw.mydata);
-            OutputStream os = new FileOutputStream(DB_FILE);
-            int read;
-            while ((read = is.read()) != -1)
+            File f = new File(DB_FILE);
+            if (! f.exists())
             {
-                os.write(read);
+                InputStream is = getResources().openRawResource(R.raw.mydata);
+                OutputStream os = new FileOutputStream(DB_FILE);
+                int read;
+                while ((read = is.read()) != -1)
+                {
+                    os.write(read);
+                }
+                os.close();
+                is.close();
             }
-            os.close();
-            is.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
