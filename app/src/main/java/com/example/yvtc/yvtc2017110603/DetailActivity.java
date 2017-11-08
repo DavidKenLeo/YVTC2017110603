@@ -24,6 +24,12 @@ public class DetailActivity extends AppCompatActivity {
         tvTel = (TextView) findViewById(R.id.textView3);
         Intent it = getIntent();
         id = it.getIntExtra("id", -1);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DBInfo.DB_FILE, null, SQLiteDatabase.OPEN_READWRITE);
         Cursor c = db.query("phone", new String[] {"id", "username", "tel"}, "id=?", new String[] {String.valueOf(id)}, null, null, null);
         if (c.moveToFirst())
@@ -32,8 +38,8 @@ public class DetailActivity extends AppCompatActivity {
             tvName.setText(c.getString(1));
             tvTel.setText(c.getString(2));
         }
-
     }
+
     public void clickBack(View v)
     {
         finish();
