@@ -57,7 +57,12 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         builder.show();
-
+    }
+    public void clickEdit(View v)
+    {
+        Intent it = new Intent(this, EditActivity.class);
+        it.putExtra("id", String.valueOf(id));
+        startActivity(it);
     }
 
 
