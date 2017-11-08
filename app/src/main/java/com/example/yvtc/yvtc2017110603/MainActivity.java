@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent it = new Intent(MainActivity.this, DetailActivity.class);
+                it.putExtra("id", mylist.get(position).id);
+                startActivity(it);
             }
         });
 
