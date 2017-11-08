@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         DB_FILE = getFilesDir() + File.separator + "mydata.sqlite";
         copyDBFile();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_FILE, null, SQLiteDatabase.OPEN_READWRITE);
-        Cursor c = db.rawQuery("Select * from phone", null);
+        // Cursor c = db.rawQuery("Select * from phone", null);
+        Cursor c = db.query("phone", new String[] {"id", "username", "tel"}, null,null,null,null,null);
+
         if (c.moveToFirst())
         {
             do {
