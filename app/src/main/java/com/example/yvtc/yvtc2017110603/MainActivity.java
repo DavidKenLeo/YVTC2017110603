@@ -32,6 +32,17 @@ public class MainActivity extends AppCompatActivity {
         mylist = new ArrayList<>();
         DBInfo.DB_FILE = getFilesDir() + File.separator + "mydata.sqlite";
         copyDBFile();
+
+
+        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, mylist);
+        lv.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mylist.clear();
         SQLiteDatabase db = SQLiteDatabase.openDatabase(DBInfo.DB_FILE, null, SQLiteDatabase.OPEN_READWRITE);
         // Cursor c = db.rawQuery("Select * from phone", null);
         Cursor c = db.query("phone", new String[] {"id", "username", "tel"}, null,null,null,null,null);
@@ -42,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 mylist.add(c.getString(1) + "," + c.getString(2));
             } while (c.moveToNext());
         }
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, mylist);
-        lv.setAdapter(adapter);
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override
